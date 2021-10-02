@@ -1,0 +1,56 @@
+.thank_you_container{
+    background-color: rgb(218,223,224);
+    width: 100vw;
+    height: 100vh;
+      
+}
+
+img{
+    width: 80px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.navber{
+    justify-content: space-between;
+}
+
+.msg{
+    background-color: rgb(63,81,181);
+    width: 40vw;
+    height: 45vh;
+    margin: auto;
+    width: 50%;
+    margin-top: 15vh;
+    border: 1px solid grey;   
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    border-radius: 5%;
+}
+
+.mat-display-2, h2,h3{
+    color: rgb(239,255,255);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#a_btn{
+    margin: 0;
+    margin-top: 1rem;
+
+}
+
+h3> a:link {
+    background-color: yellow;
+  }
+  
+h3> a:visited {
+    background-color: cyan;
+  }
+  
+h3> a:hover {
+    background-color: lightgreen;
+  }
+  

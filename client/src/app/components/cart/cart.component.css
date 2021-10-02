@@ -1,0 +1,41 @@
+.cart_bottom_user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#del_all_prod{
+    margin-bottom: 1rem;
+}
+
+mat-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+img{
+    height: 30px;
+}
+
+mat-card>div{
+    text-align: center;
+}
+
+.border_left{
+    border-left: 1px rgb(158, 158, 158) solid;
+   
+}
+
+mat-icon{
+    cursor: pointer;
+}
+
+.items_header{
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+    border-bottom: darkgrey 1px solid;
+}

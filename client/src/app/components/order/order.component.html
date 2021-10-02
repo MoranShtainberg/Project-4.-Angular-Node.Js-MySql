@@ -1,0 +1,195 @@
+<!-- ----------------------------------------------------------------nav -->
+
+<mat-toolbar color="primary" class="navber">
+    <div>
+        <img src="https://drive.google.com/uc?export=view&id=1B1SxreVOjvNTkJ9EyMnPqKPgtI19vrDH" alt="shopfast logo" routerLink="main">
+    </div>
+
+    <div>
+        <!-- <span>Hello guest / {{f_n}} </span> -->
+        <div *ngIf="has_token_expired_question; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>Hello {{f_n}}</ng-template>
+        <ng-template #elseBlock>Hello guest</ng-template>
+    </div>
+
+    <div>
+        <button mat-raised-button (click)="logmeOut()">LOGOUT</button>
+    </div>
+</mat-toolbar>
+<!-- -------------------------------------------------------------------container--------- -->
+<div class="order_container">
+    
+    <div class="order_cart_items">      
+        <app-cart></app-cart>
+    </div>
+
+    <div class="order_mid"></div>
+
+    <div class="order_address_payment">
+        <!-- ----------------------------------------------form--------------------- -->
+        <!-- order_date ,delivery_date, total_price, credit_card_4_last_digits, delivery_city, delivery_Street -->
+        <!-- (ngSubmit)="_data_order.order_submitting(OrderDateDate,
+                                                       myForm.value.delivery_date,
+                                                       _data_cart.getCartSum(),
+                                                       myForm.value.credit_card_4_last_digits,
+                                                       myForm.value.delivery_city,
+                                                       myForm.value.delivery_Street)" -->
+        <!-- OrderDateDate -->
+        <form [formGroup]="myForm"
+
+              (ngSubmit)="_data_order.order_submitting(OrderDateDate,
+                                                        myForm.value.delivery_date,
+                                                        _data_cart.getCartSum(),
+                                                        (myForm.value.credit_card_4_last_digits).toString().substr(8,4),
+                                                        myForm.value.delivery_city,
+                                                        myForm.value.delivery_Street)"
+                >
+            <div class="example-form">
+
+                <h2>Delivery address and date</h2>
+
+                <!-- --------------------------------------delivery_city -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Delivery City</mat-label>
+                    <mat-select formControlName="delivery_city" 
+                                [(value)]="selected"                                
+                            >                        
+                        <mat-option *ngFor="let cit of biggest10cities" [value]="cit" (dblclick)="city_db_click()">
+                            {{cit}}
+                        </mat-option>
+                    </mat-select>
+
+                    <!-- <mat-hint align="start"><strong>Double-click to automatically populate </strong> </mat-hint> -->
+                </mat-form-field>
+
+                <!-- <span>{{selected}}</span>
+                <span>|| value = {{myForm.value.delivery_city }}</span>
+                <span>|| invalid ={{myForm.controls.delivery_city.invalid }}</span>  -->
+
+                <!-- --------------------------------------delivery_Street -->
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Delivery Street</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="Delivery Street" 
+                            type="text"
+                            formControlName="delivery_Street"
+                            (dblclick)="street_db_click()"
+                    >
+
+                    <mat-hint align="start"><strong>Double-click to automatically populate </strong> </mat-hint>
+                </mat-form-field>
+                <!-- --------------------------------delivery_date----- -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a delivery date</mat-label>
+                    <input matInput
+                           [matDatepicker]="picker" 
+                           required
+                           [min]="minDate"
+                           [matDatepickerFilter]="dateFilter" 
+                           formControlName="delivery_date"
+                    >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <!-- <span>{{myForm.value.delivery_date}}</span> -->
+
+                <!-- -----============================CREDIT CARD===========================----- -->
+                <hr>
+                <br>
+                
+                <h2>Credit card info</h2>
+                <!-- ------------------------credit_card_4_last_digits--------------------------------- -->
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Card number</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="Card number" 
+                            type="number"
+                            #message                            
+                            formControlName="credit_card_4_last_digits"
+                    >
+                    <mat-hint align="start"><strong>12 digits</strong> </mat-hint>
+                    <mat-hint align="end">{{message.value.length}} / 12</mat-hint>
+                </mat-form-field>
+                
+
+                <div class="dd_mm">               
+                    <!-- ------------------------mm (month)--------------------------------- -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>MM</mat-label>
+
+                        <mat-select formControlName="mm" 
+                                    [(value)]="selected_mm" 
+                                >                        
+                            <mat-option *ngFor="let mm of month_arr" [value]="mm">
+                                {{mm}}
+                            </mat-option>
+                        </mat-select>                        
+
+                        <!-- <input matInput
+                                required 
+                                placeholder="MM" 
+                                type="number"
+                                formControlName="mm"
+                        > -->
+                    </mat-form-field>
+                    <!-- <span>{{selected_mm}}</span> -->
+                    <!-- ------------------------yy (month)--------------------------------- -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>YY</mat-label>
+
+                        <mat-select formControlName="yy" 
+                                    [(value)]="selected_yy" 
+                                >                        
+                            <mat-option *ngFor="let yy of year_arr" [value]="yy">
+                                {{yy}}
+                            </mat-option>
+                        </mat-select>
+
+                        <!-- <input matInput
+                                required 
+                                placeholder="YY" 
+                                type="number"
+                                formControlName="yy"
+                        > -->
+                    </mat-form-field>
+                    <!-- <span>{{selected_yy}}</span> -->
+                </div>
+                <!-- ------------------------cvv --------------------------------- -->
+                <mat-form-field appearance="fill">
+                    <mat-label>CVV</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="CVV" 
+                            type="number"
+                            formControlName="cvv"
+                    >
+                </mat-form-field>
+                <!-- ------------------------submit --------------------------------- -->
+                <br>
+
+                <button mat-raised-button
+                        type="submit" 
+                        color="primary"
+                        [disabled]="myForm.invalid"
+                    >
+                    Submit
+                </button>
+            </div>
+
+            <!-- <h3>Total: {{_data_cart.getCartSum() |currency}}</h3>
+            <br>
+            <span>{{_data_order.orders_per_deliveryDate |json}}</span>
+            <br>
+            <div>_data_order.nonDeliveryTime_result</div>
+            <span>{{_data_order.nonDeliveryTime_result}}</span> -->
+            <!-- <br>
+            <span>{{_data_order.userAddress | json}}</span> -->
+            <!-- <br>
+            <span>{{_data_order.orders_per_deliveryDate | json}}</span> -->
+        </form>
+    </div>
+
+</div>
+

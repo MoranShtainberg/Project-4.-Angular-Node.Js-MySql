@@ -1,0 +1,38 @@
+<!-- ----------------------------------------------------------------nav -->
+
+<mat-toolbar color="primary" class="navber">
+    <div>
+        <img src="https://drive.google.com/uc?export=view&id=1B1SxreVOjvNTkJ9EyMnPqKPgtI19vrDH" alt="shopfast logo">
+    </div>
+
+    <div>
+        <!-- <span>Hello guest / {{f_n}} </span> -->
+        <div *ngIf="has_token_expired_question; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>Hello {{f_n}}</ng-template>
+        <ng-template #elseBlock>Hello guest</ng-template>
+    </div>
+
+    <div>
+        <button mat-raised-button (click)="logmeOut()">LOGOUT</button>
+    </div>
+</mat-toolbar>
+
+<!-- ----------------------------------------------------------------grid -->
+
+<mat-grid-list cols="3" gutterSize="10px" rowHeight="94%">
+    <mat-grid-tile>
+        <app-login></app-login>
+    </mat-grid-tile>
+            
+    <mat-grid-tile>
+        <app-main-mid></app-main-mid>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <app-main-right
+            [has_token_expired_question]="has_token_expired_question"
+            [f_n]="f_n"
+        ></app-main-right>
+    </mat-grid-tile>
+</mat-grid-list>
+

@@ -1,0 +1,35 @@
+
+<div class="mat-display-1">ShopFast statistic:</div>
+
+<div class="mat-title">Number of products in our store: {{_data_main.num_of_prod_result}}</div>
+
+<div class="mat-title">Number of orders submitted in our store: {{_data_main.num_of_paid_carts_result}}</div>
+<!-- <span>{{_data_main.num_of_paid_carts_result |json}}</span> -->
+
+<!-- <span *ngIf="has_token_expired_question">Wellcome {{f_n}}</span> -->
+
+<hr>
+<br>
+
+<div *ngIf="has_token_expired_question; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <h3>
+            Wellcome {{f_n}}
+        </h3>
+    </ng-template>
+
+    <ng-template #elseBlock>
+        <h3>
+            Wellcome guest
+        </h3>
+    </ng-template>
+
+
+<ul *ngIf="_data_main.resStatus_open_cart_date==200">
+    <li *ngIf="has_token_expired_question">You have an open cart from date: {{ _data_main.open_cart_date_result | date :" dd MMM YYYY" }}</li>
+</ul>
+
+<br>
+<ul *ngIf="_data_main.resStatus_last_paid_cart==200">  
+    <li>Your last purchest was on: {{_data_main.last_paid_cart_date_result | date :" dd MMM YYYY"}}</li>
+</ul>

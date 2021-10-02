@@ -1,0 +1,22 @@
+<div class="cart_container" (click)="onCardClick(prod.product_name)">
+    
+    <div class="product_nameDiv">
+        <h2>
+            {{prod.product_name}}
+        </h2>
+    </div>
+
+    <div class="product_PicDiv"
+                [ngStyle]="{'background-image': 'url(' + prod.picture_url + ')',
+                            'background-size':'cover',
+                            'background-repeat':'no-repeat'}"
+        >       
+    </div>
+
+    <div class="product_priceDiv">
+        <h4>{{prod.price_in_usd | currency}}, {{prod.price_type}}</h4>
+    </div>
+
+</div>
+
+<!-- <span>{{prod |json}}</span> -->

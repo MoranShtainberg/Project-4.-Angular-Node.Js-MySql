@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Please select quantity</h2>
+
+<div mat-dialog-content>
+    <p>{{data.prod_name}} </p>
+    <!-- <span>{{data.prod_id}}</span> -->
+
+    <mat-icon color="accent" 
+              (click)="decrease()"
+              *ngIf="input_quantity != 0"
+              class="mouse_pointer"
+            >
+      remove_circle
+    </mat-icon>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input matInput type="number" min="0" step="1" [(ngModel)]="input_quantity">
+    </mat-form-field>
+
+    <mat-icon color="primary" 
+              (click)="increase()"              
+              class="mouse_pointer"
+            >
+      add_circle
+    </mat-icon>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button 
+            mat-dialog-close
+            mat-dialog-close="false"
+          >
+      Discard
+    </button>
+
+    <button mat-raised-button color="primary" 
+            cdkFocusInitial 
+            mat-dialog-close
+            mat-dialog-close="true"
+            (click)="_data_cart.add_product_to_cart(data.prod_id, input_quantity)"
+            *ngIf="input_quantity > 0"
+            >
+      Submit
+    </button>
+    <!-- <span>{{input_quantity.value}}</span> -->
+</div>
+    

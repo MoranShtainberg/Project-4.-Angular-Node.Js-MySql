@@ -1,0 +1,19 @@
+export default interface CartsTableModel{
+    cart_id?:number
+    user_id_ref?:number
+    cart_status_id_ref?:number	
+    cart_created_date?:Date
+    order_date?:Date
+    delivery_date?:Date	
+    total_price?:number	
+    credit_card_4_last_digits?:number
+    delivery_city?:string
+    delivery_Street?:string
+    picture_url?:string
+    product_id_ref?:number
+    product_name?:string
+    price_in_usd?:number
+    price_type?:string
+    quantity?:number
+    cart_id_ref?:number
+}

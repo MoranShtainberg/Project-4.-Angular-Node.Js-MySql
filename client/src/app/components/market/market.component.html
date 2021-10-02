@@ -1,0 +1,95 @@
+<!-- ----------------------------------------------------------------nav -->
+
+<mat-toolbar color="primary" class="navber">
+    <div>
+        <img src="https://drive.google.com/uc?export=view&id=1B1SxreVOjvNTkJ9EyMnPqKPgtI19vrDH" alt="shopfast logo" routerLink="main">
+    </div>
+
+    <div>
+        <!-- <span>Hello guest / {{f_n}} </span> -->
+        <div *ngIf="has_token_expired_question; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>Hello {{f_n}}</ng-template>
+        <ng-template #elseBlock>Hello guest</ng-template>
+    </div>
+
+    <div>
+        <button mat-raised-button (click)="logmeOut()">LOGOUT</button>
+    </div>
+</mat-toolbar>
+
+<!-- ------------------------------------------------------------------------- sidenav---------------- -->
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav 
+                 mode="side"
+                 (opened)="logCartToggle('opened')"
+                 (closed)="logCartToggle('closed')"
+                >
+        <app-cart *ngIf="!isAdmin"></app-cart>
+        <app-admin-cru *ngIf="isAdmin"></app-admin-cru>
+    </mat-sidenav>
+    <!-- ---------------------------------------------------------market -->
+    <mat-sidenav-content>
+        <div class="market_toggle_search">             
+            
+            <mat-slide-toggle (click)="sidenav.toggle()">
+                Hide/Show cart
+            </mat-slide-toggle>            
+
+            <mat-form-field id="search_in_market" appearance="fill">
+                <mat-label>Search a product</mat-label>
+                <input matInput
+                       placeholder="Search a product" 
+                       #input_search_market
+                       >
+            </mat-form-field>
+
+            <mat-icon 
+                    color="primary" 
+                    id="market_search_icon"
+                    (click)="_data_market.search_value_in_market(input_search_market.value)"
+                    >
+                    <!-- (click)="onSearchIconClick(input_search_market.value)" -->
+                search
+            </mat-icon>
+        </div>
+        <!-- ------------------------------------------- Categories btn's -->
+        <div class="market_categories">           
+
+            <mat-button-toggle-group appearance="legacy" 
+                                     name="fontStyle" 
+                                     aria-label="Font Style" 
+                                     #toggleGroup="matButtonToggleGroup"
+                                     (click)="_data_market.getMarketProducts(toggleGroup.value)"                                     
+                                >
+                                     <!-- (click)="onCategoryClick(toggleGroup.value)" -->
+                    <mat-button-toggle value=''
+                                        (click)="_data_market.getMarketProducts('')"
+                                    >
+                        All
+                    </mat-button-toggle>
+
+                    <mat-button-toggle *ngFor="let cate of _data_market.categories_arr" 
+                                        value={{cate.category_id}}                                 
+                                    >
+                            {{cate.category_name}}
+                    </mat-button-toggle>
+                
+            </mat-button-toggle-group>
+             <!-- value={{cate.category_id}} -->
+            <!-- <br> -->
+            <!-- {{toggleGroup.value}} -->        
+
+        </div>
+        <!-- ----------------------------------cards generator (*ngFor) -->
+        <div class="market_main">
+            <!-- cards goes here -->
+            <app-cards *ngFor="let prod of _data_market.market_products_arr" 
+                                  [prod]="prod"
+                                  [isAdmin]="isAdmin"            
+            ></app-cards>
+            
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

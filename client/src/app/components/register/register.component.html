@@ -1,0 +1,223 @@
+
+<!-- ----------------------------------------------------------------nav---------------------- -->
+
+<mat-toolbar color="primary" class="navber">
+    <div>
+        <img src="https://drive.google.com/uc?export=view&id=1B1SxreVOjvNTkJ9EyMnPqKPgtI19vrDH" alt="shopfast logo" routerLink="main">
+    </div>
+
+    <div>        
+        Hello guest
+    </div>
+
+    <div>
+        <button mat-raised-button 
+                (click)="logmeOut()"
+         >
+            LOGOUT
+        </button>
+    </div>
+</mat-toolbar>
+
+<!-- ----------------------------------------------------------------grid----------------------- -->
+<mat-grid-list cols="2" gutterSize="10px" rowHeight="94%">
+    
+   <!-- ----------------------------------------left form (pre_registration)--> 
+    <mat-grid-tile>
+        <form
+            [formGroup]="myFormLeft"
+            (ngSubmit)="_data_auth.pre_registration(
+                myFormLeft.value.username,
+                myFormLeft.value.password,
+                myFormLeft.value.confirm_password,
+                myFormLeft.value.Id_number)"
+         >
+           <h1>Register</h1>
+           <h4>Step 1 of 2</h4>
+
+            <div class="example-form">
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Id number</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="Id_number" 
+                            type="number"
+                            formControlName="Id_number" 
+                            [readonly]=_data_auth.myFormLeft_valid                        
+                    >
+                </mat-form-field>
+                <!-- <span>id number valid: {{myFormLeft.controls.Id_number.valid}}</span> -->
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>username(email)</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="username" 
+                            type="email"
+                            formControlName="username"
+                            [readonly]=_data_auth.myFormLeft_valid                             
+                    >
+                </mat-form-field>
+
+                <!-- <span>| invalid?:{{myFormLeft.controls.username.invalid}}</span> -->
+                <!-- <br> -->
+                <!-- <span></span> -->
+                <!-- <span>| valid?:{{myFormLeft.controls.username.valid}}</span> -->
+                <!-- <br> -->
+                <!-- <span>| pattern?:{{myFormLeft.controls.username.errors?.pattern?.requiredPattern }}</span> -->
+
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>password</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="password" 
+                            type="password"
+                            formControlName="password"
+                            [readonly]=_data_auth.myFormLeft_valid 
+                    >
+                </mat-form-field>
+                <!-- <span>| password valid?:{{myFormLeft.controls.password.valid}}</span> -->
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Confirm password</mat-label>
+                    <input matInput
+                            required 
+                            placeholder="Confirm password" 
+                            type="password"
+                            formControlName="confirm_password"
+                            [readonly]=_data_auth.myFormLeft_valid 
+                    >
+                </mat-form-field>
+                <!-- <span>| confirm_password valid?:{{myFormLeft.controls.confirm_password.valid}}</span> -->
+                 <!-- <hr>    -->
+
+                <button mat-raised-button
+                        type="submit" 
+                        color="primary"
+                        [disabled]="myFormLeft.invalid"
+                    >Next
+                </button>
+
+                <!-- <br>
+                <span>myFormLeft.value | json: {{myFormLeft.value | json}}</span>
+                <br>
+                <span>myFormLeft.valid: {{myFormLeft.valid | json}}</span>
+                <br>               
+                <span>myFormLeft_valid (_data_auth): {{_data_auth.myFormLeft_valid}}</span>
+                <br>
+                <span>pre_registration_arr (_data_auth): {{_data_auth.pre_registration_arr}}</span>
+                <br>
+                <span>pre_registationRes400 (_data_auth){{_data_auth.pre_registationRes400}} </span> -->
+                <br>
+                <span *ngIf="_data_auth.pre_registationRes400"
+                      class="server_error_msg"
+                    >
+                    {{_data_auth.pre_registration_arr}} 
+                </span>
+
+                <!-- <br> -->
+                <h3 *ngIf="_data_auth.myFormLeft_valid"
+                    class="success_msg"
+                 >
+                    The first step was completed successfully. Go to step two
+                </h3>
+       
+            </div>
+
+            <p>Already have an account? Login <a routerLink="/main">here</a></p>    
+       </form>
+    </mat-grid-tile>
+    <!-- ----[disabled]="myFormLeft.invalid"-----disabled={{myFormLeft_valid}} -->
+
+   <!-- ----------------------------------------rigth form------------------------------------- --> 
+   <!-- username, password, first_name, last_name, Id_number, city, street -->
+
+    <mat-grid-tile>
+        
+        <form
+            [formGroup]="myFormRigth"
+            (ngSubmit)="_data_auth.register(
+                myFormLeft.value.username,
+                myFormLeft.value.password,
+                myFormRigth.value.first_name,
+                myFormRigth.value.last_name,
+                myFormLeft.value.Id_number,
+                myFormRigth.value.city,
+                myFormRigth.value.Street)"
+        >            
+        
+        <!-- <h1>Register</h1> -->
+        <h4>Step 2 of 2</h4>
+
+        <div class="example-form">
+            <mat-form-field appearance="fill">
+                <mat-label>City</mat-label>
+                <mat-select formControlName="city" 
+                            [(value)]="selected" 
+                            [disabled]=!_data_auth.myFormLeft_valid>
+                    <!-- <mat-option disabled>--</mat-option> -->
+                    <mat-option *ngFor="let cit of biggest10cities" [value]="cit">
+                        {{cit}}
+                    </mat-option>
+                </mat-select>                            
+            </mat-form-field>
+
+            <!-- <span>{{selected}}</span> -->
+            <!-- <span>|| value = {{myFormRigth.value.city }}</span> -->
+            <!-- <span>|| invalid ={{myFormRigth.controls.city.invalid }}</span>    -->
+
+        
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Street</mat-label>
+                <input matInput
+                        required 
+                        placeholder="Street" 
+                        type="text"
+                        formControlName="Street"
+                        [readonly]=!_data_auth.myFormLeft_valid
+                >
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>First name</mat-label>
+                <input matInput
+                        required 
+                        placeholder="First name" 
+                        type="text"
+                        formControlName="first_name"
+                        [readonly]=!_data_auth.myFormLeft_valid
+                >
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Last name</mat-label>
+                <input matInput
+                        required 
+                        placeholder="Last name" 
+                        type="text"
+                        formControlName="last_name"
+                        [readonly]=!_data_auth.myFormLeft_valid
+                >
+            </mat-form-field>              
+
+            <button mat-raised-button
+                    type="submit" 
+                    color="primary"
+                    [disabled]=myFormRigth.invalid
+                >Submit
+            </button>
+
+            <!-- <br> -->
+            <!-- <span>register_arr (_data_auth): {{_data_auth.register_arr}}</span> -->
+            <!-- <br> -->
+            <span *ngIf="_data_auth.registerRes400"
+                  class="server_error_msg">
+                {{_data_auth.register_arr}}
+            </span>
+        </div>      
+        
+       </form>  
+    </mat-grid-tile>
+</mat-grid-list>

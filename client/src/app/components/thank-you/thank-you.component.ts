@@ -1,0 +1,82 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
+import { DataOrderService } from 'src/app/services/data-order.service';
+
+@Component({
+  selector: 'app-thank-you',
+  templateUrl: './thank-you.component.html',
+  styleUrls: ['./thank-you.component.css']
+})
+export class ThankYouComponent implements OnInit {
+
+   //----------------------------------token variables----------------------
+   public token = localStorage.token;
+   public has_token_expired_question:boolean;
+   public f_n:string;
+   
+   getDecodedAccessToken(token: string): any {
+    try{
+      return jwt_decode(token);
+      console.log(jwt_decode);
+    }
+    catch(Error){
+      return null;
+    }
+  }
+  //--------------------------------------------------------------
+
+  public cart_id: object;
+  public concat_cart_id:string
+
+  constructor(
+    public _r:Router,
+    public _data_order: DataOrderService
+  ) { }
+
+  public logmeOut(){
+    localStorage.removeItem("token");
+    this._r.navigateByUrl('/');   
+  }
+
+  //===================================ngOnInit===========================================================
+  ngOnInit(): void {
+
+    // this._data_order.obs_cart_id().subscribe((d)=>{
+    //   this.cart_id = d;
+    // })
+
+    this.cart_id = this._data_order.subject_cart_id
+    this.concat_cart_id = `http://localhost:1000/receipts/${this._data_order.simple_cart_id }`
+
+    //------------------------------------------------------------token processing-----------------------
+    console.log("!!!localStorage.token : "+!!!localStorage.token);
+
+    if (!!!localStorage.token) {
+      this.has_token_expired_question =false  // false -> don't render (there is no token in the localStorage)
+      
+    } else {
+      // decode token
+      let tokenInfo = this.getDecodedAccessToken(this.token); 
+      this.f_n = tokenInfo.first_name;
+      // this.isAdmin = tokenInfo.isAdmin;
+      let expireDate = tokenInfo.exp; // get token expiration dateTime
+      //console.log(tokenInfo); // show decoded token object in console
+      //console.log("isAdmin? (market): "+this.isAdmin); 
+      
+      //token expires?
+       //console.log(this.has_token_expired_question);
+
+        if (expireDate*1000 < new Date().getTime()) {
+          this.has_token_expired_question = !true // false -> don't render (token expires)
+          //remove expierd token from localStorage
+            localStorage.removeItem("token");
+            this._r.navigateByUrl('/main');            
+
+        } else {
+          this.has_token_expired_question = !false // true -> render
+        }//ifElse 2
+    } //ifElse 1 
+  }
+
+}

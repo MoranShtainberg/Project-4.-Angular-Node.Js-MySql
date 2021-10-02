@@ -1,0 +1,43 @@
+img{
+    width: 80px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.navber{
+    justify-content: space-between;
+}
+
+mat-grid-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+}
+
+mat-grid-tile {
+    background: rgb(218, 223, 224); 
+ 
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.example-full-width {
+    width: 100%;
+    
+}
+
+.success_msg{
+    background-color:rgb(63,81,181);
+    color: whitesmoke;
+    margin-top: 1rem;
+}
+
+.server_error_msg{
+    color: red;
+    font-size: x-large;
+}

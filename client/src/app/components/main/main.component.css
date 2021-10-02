@@ -1,0 +1,40 @@
+img{
+    width: 80px;
+    padding-top: 10px;
+}
+
+.navber{
+    justify-content: space-between;
+}
+
+
+
+mat-grid-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+}
+
+mat-grid-tile {
+    background: rgb(218, 223, 224); 
+ 
+}
+
+
+
+/* #main-container{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+} */
+
+/* #main_inner_div{
+    min-width: 250px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-color: rgb(28, 80, 82);
+} */

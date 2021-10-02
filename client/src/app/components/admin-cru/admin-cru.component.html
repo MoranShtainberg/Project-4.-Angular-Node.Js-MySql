@@ -1,0 +1,121 @@
+<h1>Create or Edit a product form</h1>
+
+<form [formGroup]="myForm"
+      (ngSubmit)="myForm.value.product_id>0? _data_cart.edit_a_product(myForm.value.product_id,
+                                                                        myForm.value.product_name,
+                                                                        myForm.value.category_id,
+                                                                        myForm.value.price_in_usd,
+                                                                        myForm.value.price_type,
+                                                                        myForm.value.picture_url)
+                                            :                                            
+                                            _data_cart.create_a_product(myForm.value.product_name,
+                                                                        myForm.value.category_id,
+                                                                        myForm.value.price_in_usd,
+                                                                        myForm.value.price_type,
+                                                                        myForm.value.picture_url) ;reloadPage()"      
+    >
+    <!-- product_id:number, product_name:string, category_id_ref:number, price_in_usd:number, price_type:string, picture_url:string -->
+
+    <h3>Select: create or edit</h3>
+    <p>To edit, first click on an existing product card</p>
+    <section>
+        <mat-button-toggle-group [formControl]="fontStyleControl" aria-label="Font Style">
+          <mat-button-toggle value="create" (click)="resetForm()">Create</mat-button-toggle>
+          <mat-button-toggle value="edit" checked>Edit</mat-button-toggle>
+          <!-- <mat-button-toggle value="underline">Underline</mat-button-toggle> -->
+        </mat-button-toggle-group>
+    </section>
+    <!-- <p>Chosen value is {{fontStyleControl.value}}</p> -->
+
+    <div class="example-form">
+        <!-- --------------------------------Product name--------------- -->
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Product name</mat-label>
+            <input matInput
+                   required 
+                   placeholder="Product name" 
+                   type="text"
+                   formControlName="product_name"           
+            >
+        </mat-form-field>
+
+        <span *ngIf="myForm.controls.product_name.dirty && myForm.controls.product_name.invalid">
+            Product name is required
+        </span>        
+        <!-- --------------------------------picture_url--------------- -->
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Picture URL</mat-label>
+            <input matInput
+                   required 
+                   placeholder="Picture URL" 
+                   type="text"
+                   formControlName="picture_url"
+            >
+        </mat-form-field>
+
+        <span *ngIf="myForm.controls.picture_url.dirty && myForm.controls.picture_url.invalid">
+            Picture URL is required
+        </span> 
+        <!-- ---------------------------------price_in_usd-------------- -->
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Price in USD</mat-label>
+            <input matInput
+                   required 
+                   placeholder="Price in USD" 
+                   type="number"
+                   formControlName="price_in_usd"
+            >
+        </mat-form-field>
+
+        <span *ngIf="myForm.controls.picture_url.dirty && myForm.controls.picture_url.invalid">
+            Price in USD is required
+        </span> 
+        <!-- ---------------------------------price_type---------------------- -->
+        <mat-form-field appearance="fill">
+            <mat-label>Price type</mat-label>
+            <mat-select formControlName="price_type" 
+                        [(value)]="selected_price_type" 
+                    >
+                <!-- <mat-option disabled>--</mat-option> -->
+                <mat-option *ngFor="let single_price_type of priceType" [value]="single_price_type">
+                    {{single_price_type}}
+                </mat-option>
+            </mat-select>                            
+        </mat-form-field>
+        <!-- ---------------------------------Category-------------- -->
+        <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category_id" 
+                        [(value)]="selected_category" 
+                    >
+                <!-- <mat-option disabled>--</mat-option> -->
+                <mat-option *ngFor="let single_category of _data_market.categories_arr" [value]="single_category.category_id">
+                    {{single_category.category_name}}
+                </mat-option>
+            </mat-select>                            
+        </mat-form-field>
+
+        <!-- <span>{{selected_category}}</span> -->
+        <!-- -------------------------------product_id------------------------ -->
+        <mat-form-field class="example-full-width" appearance="fill" *ngIf="!fontStyleControl.value">
+            <mat-label>Product Id</mat-label>
+            <input matInput                   
+                   placeholder="Product Id" 
+                   type="number"
+                   formControlName="product_id"
+                   readonly
+            >
+        </mat-form-field>
+
+        <br>
+        <!-- ------------------------------submit----------------------------- -->
+        <button mat-raised-button
+                type="submit" 
+                color="primary"
+                [disabled]="myForm.invalid"
+            >
+            Save
+        </button>
+    </div>
+
+</form>

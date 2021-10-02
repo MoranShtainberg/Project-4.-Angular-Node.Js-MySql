@@ -1,0 +1,81 @@
+<!-- ------------------------------------------------------------left order headers -->
+        <div class="items_header" *ngIf="currentURL=='/order'">
+            <h2>My order</h2>
+
+            <div class="search_in_order">
+                <mat-form-field id="search_in_order" appearance="fill">
+                    <mat-label>Search a product in the order</mat-label>
+                    <input matInput
+                           placeholder="Search in order" 
+                           [(ngModel)]=input_search_order
+                           >
+                </mat-form-field>
+    
+                <!-- <mat-icon 
+                        color="primary" 
+                        id="order_search_icon"
+                        >
+                        search
+                </mat-icon> -->
+            </div>
+                <!-- (click)="_data_market.search_value_in_market(input_search_order.value)" -->
+                <!-- (click)="onSearchIconClick(input_search_order.value)" -->
+                
+            <a routerLink="/market"
+               mat-raised-button color="primary"             
+             >
+                Back to shop
+            </a>
+        </div>
+<!-- ------------------------------------------------------------ END: left order headers -->
+
+<h2 *ngIf="currentURL=='/market'">My Cart!</h2>
+
+<div>
+    <button mat-raised-button 
+            color="accent" 
+            id="del_all_prod"            
+            (click)="_data_cart.delete_all_cart_items()"
+            *ngIf="currentURL=='/market'"
+        >
+        Delete all products
+    </button>
+</div>
+
+<mat-card *ngFor="let singleProduct of _data_cart.cartProducts">
+
+    <div *ngIf="currentURL=='/market'">
+        <mat-icon (click)="_data_cart.delete_a_single_item_from_cart(singleProduct.product_id_ref)">
+            delete
+        </mat-icon>
+    </div>
+
+    <img src={{singleProduct.picture_url}} alt="product pic">
+    <div class="border_left">Qty: {{singleProduct.quantity}} </div>
+    <div class="border_left" innerHTML="{{ singleProduct.product_name | highlight : input_search_order}}"></div>
+    <div class="border_left">{{singleProduct.price_in_usd |currency}}, {{singleProduct.price_type}}</div>
+    <div class="border_left">Subtotal: {{singleProduct.price_in_usd*singleProduct.quantity |currency}}</div>
+</mat-card>
+
+
+<div class="cart_bottom_user">
+    <h3>Total: {{_data_cart.getCartSum() |currency}}</h3>
+
+    <!-- <button mat-raised-button color="primary">
+        Order
+    </button> -->
+
+    <a routerLink="/order"
+       mat-raised-button color="primary"
+       *ngIf="currentURL=='/market'"             
+     >
+        Order
+    </a>
+</div>
+<!-- ------------------------------------- -->
+<br>
+<!-- <span>{{_data_cart.cartProducts | json}}</span> -->
+<!-- <span>{{currentURL}}</span> -->
+<!-- <span *ngIf="currentURL=='/market'">it works</span> -->
+
+

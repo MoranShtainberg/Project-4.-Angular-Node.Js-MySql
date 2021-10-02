@@ -1,0 +1,53 @@
+img{
+    width: 80px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.navber{
+    justify-content: space-between;
+}
+
+.order_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100vw;
+    height: 91.5vh;     
+}
+
+.order_cart_items{
+    background-color: rgb(218,223,224);
+    width: 49.7vw;
+    /* height: 70vh; */
+}
+
+.order_mid{
+    background-color:rgb(255,255,255);
+    width: 0.1vw;
+}
+
+.order_address_payment{
+    background-color: rgb(218,223,224);
+    width: 49.7vw;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+}
+  
+.example-full-width {
+    width: 100%;    
+}
+
+.dd_mm{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+

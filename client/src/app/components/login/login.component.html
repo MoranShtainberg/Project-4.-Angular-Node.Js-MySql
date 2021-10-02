@@ -1,0 +1,92 @@
+
+<!-- <span>token_exist: {{_data_user_main.is_token_exist_flag}}</span>
+<br>
+<span>token_expired: {{_data_user_main.has_token_expired_question}}</span>
+<br>
+<span>open_cart_flag:{{_data_user_main.there_is_an_open_cart_flag}}</span>
+<br> -->
+<!-- ----------------------------btn------------------------------------- -->
+
+<div class="btnDiv"
+    *ngIf="_data_user_main.is_token_exist_flag == true"
+>
+    <button mat-raised-button color="primary"
+            *ngIf="_data_user_main.there_is_an_open_cart_flag == false"
+            (click)="_data_user_main.createCart()"            
+     >
+        Start Shopping
+    </button>
+    
+    <a routerLink="/market"
+        mat-raised-button color="primary"
+        *ngIf="_data_user_main.there_is_an_open_cart_flag == true"   
+     >
+        Resume Shopping
+    </a>
+</div>
+
+<!-- -----------------------LOGIN FORM-------------------------- -->
+
+<div class="loginDiv"
+     *ngIf="_data_user_main.is_token_exist_flag == false"
+ >
+    <div class="mat-display-1">Login</div>
+
+    <form 
+        [formGroup]="myForm"
+        (ngSubmit)="_data_auth.login(myForm.value.username,
+                                    myForm.value.password)"
+     >
+        <div class="example-form">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>username(email)</mat-label>
+                <input matInput
+                       required 
+                       placeholder="username" 
+                       type="email"
+                       formControlName="username"
+                >
+            </mat-form-field>
+
+            <span *ngIf="myForm.controls.username.dirty && myForm.controls.username.invalid">
+                password is required in an email format
+            </span>
+            
+            <span *ngIf="_data_auth.loginRes400"
+                  [ngStyle]="{'color':'red'}"
+                >
+                {{_data_auth.login_data_arr}}
+            </span>
+        </div>
+        <!-- ------------------------------------password--------------- -->
+        <div class="example-full-width">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>password</mat-label>
+                <input matInput
+                        required 
+                        placeholder="password" 
+                        type="password"
+                        formControlName="password"                   
+                >
+            </mat-form-field>
+        </div>
+
+        <!-- ------------------------------------submit--------------- -->
+        <!-- <input type="submit" value="login"> -->
+        <button mat-raised-button
+                type="submit" 
+                color="primary"
+                [disabled]="myForm.invalid"
+            >Login
+        </button>
+    </form>
+
+    <!-- <p>{{myForm.value | json}}</p> -->
+    <!-- <p>{{myForm.invalid | json}}</p> -->
+    <!-- <p>{{myForm.controls.username.dirty | json}}</p> -->
+    <!-- <p>{{myForm.controls.username.errors | json}}</p> -->
+
+    <p>Don't have an account yet? register <a routerLink="/register">here</a></p>
+</div>

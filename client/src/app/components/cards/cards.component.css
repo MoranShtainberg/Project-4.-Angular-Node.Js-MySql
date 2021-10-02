@@ -1,0 +1,40 @@
+.cart_container{
+    padding: 0.5rem;
+    /* width: 15%; */
+    min-width: 16rem;
+    /* height: 30%; */
+    min-height: 15rem;
+    margin: 0.5rem;
+        
+    border: rgb(63,81,181) 4px solid;
+    border-radius: 10%;
+
+    display: grid;
+    grid-template-rows: 25% auto 15% ;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+    "a"
+    "b"
+    "c";
+}
+
+.product_nameDiv{
+    grid-area: a;
+    background-color: gainsboro;
+    word-wrap: break-word;
+    font-size: large;
+    
+}
+    
+.product_PicDiv{
+    grid-area: b;   
+
+}
+
+.product_priceDiv{
+    grid-area: c;
+    background-color: gainsboro;
+}
+
+
+

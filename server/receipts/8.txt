@@ -1,0 +1,18 @@
+Hey rrr 
+
+        Here are your order details:
+
+        Order date:     9/ 9 / 2021 
+
+        Delivery date:  16/ 9 / 2021 
+
+        Delivey city: Rishon LeZion 
+
+        Delivery street: rishon 23211 
+
+        Total price: 83.56 USD
+
+        Product No.1: Milk, 1 Liter in carton, Qty: 1, Price (USD): 6 Per unit. Sub total: 6 USD 
+Product No.2: Cheese borax, Qty: 1, Price (USD): 4.7 Per unit. Sub total: 4.7 USD 
+Product No.3: Cheerios, honey cereal, 750 g, Qty: 1, Price (USD): 6.56 Per unit. Sub total: 6.56 USD 
+Product No.4: Frozen Stake, Qty: 3, Price (USD): 22.1 Per unit. Sub total: 66.30000000000001 USD 

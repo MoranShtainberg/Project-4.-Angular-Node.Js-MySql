@@ -1,0 +1,18 @@
+Hey ashe 
+
+        Here are your order details:
+
+        Order date:     9/ 9 / 2021 
+
+        Delivery date:  15/ 9 / 2021 
+
+        Delivey city: Ashdod 
+
+        Delivery street: as 1 
+
+        Total price: 65.12 USD
+
+        Product No.1: Kabab, Qty: 2, Price (USD): 13.99 Per unit. Sub total: 27.98 USD 
+Product No.2: 12 Corsons Pack, Qty: 3, Price (USD): 7.22 Per unit. Sub total: 21.66 USD 
+Product No.3: milkshake pack, Qty: 2, Price (USD): 2.99 Per unit. Sub total: 5.98 USD 
+Product No.4: Frozen chicken breast, Qty: 1, Price (USD): 9.5 Per unit. Sub total: 9.5 USD 

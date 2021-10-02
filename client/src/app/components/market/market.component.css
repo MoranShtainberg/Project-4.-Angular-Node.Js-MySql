@@ -1,0 +1,83 @@
+img{
+    width: 80px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.navber{
+    justify-content: space-between;
+}
+
+.example-container {
+    height: 92%;
+  /* position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee; */
+}
+
+mat-sidenav{
+    background-color: rgb(226, 222, 222);
+    width: 350px;
+    padding: 16px;
+}
+
+mat-sidenav-content{
+    padding: 1px;
+    width: 100%;
+    height: 100%;
+    margin: 0%;
+    display: grid;
+    grid-template-rows: 8% 8% auto;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+    "a"
+    "b"
+    "c";
+}
+
+.market_toggle_search{
+    grid-area: a;
+    background-color: gainsboro;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+    border-bottom: ivory 1px solid;
+}
+
+.market_categories{
+    grid-area: b;
+    background-color: rgb(255,255,255);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-bottom: ivory 1px solid;
+}
+
+.market_main{
+    grid-area: c;
+    background-color: gainsboro;;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items: stretch;
+    
+}
+
+#search_in_market{
+    margin-left: 3rem;
+    width:20%;
+}
+
+#market_search_icon{
+    cursor: pointer;
+}
+
+
+
+

@@ -1,0 +1,39 @@
+<div class="thank_you_container">
+
+    <!-- ----------------------------------------------------------------nav -->
+
+    <mat-toolbar color="primary" class="navber">
+        <div>
+            <img src="https://drive.google.com/uc?export=view&id=1B1SxreVOjvNTkJ9EyMnPqKPgtI19vrDH" alt="shopfast logo" routerLink="main">
+        </div>
+
+        <div>
+            <!-- <span>Hello guest / {{f_n}} </span> -->
+            <div *ngIf="has_token_expired_question; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>Hello {{f_n}}</ng-template>
+            <ng-template #elseBlock>Hello guest</ng-template>
+        </div>
+
+        <div>
+            <button mat-raised-button (click)="logmeOut()">LOGOUT</button>
+        </div>
+    </mat-toolbar>
+    <!-- ----------------------------------------------------------------msg------------------- -->
+    <!-- <span>cart id {{cart_id | json}}</span> -->
+    <!-- <br> -->
+    <!-- <span>_data_order.simple_cart_id: {{_data_order.simple_cart_id | json}}</span> -->
+    <!-- <br> -->
+    <!-- <span>concat_cart_id: {{concat_cart_id | json}}</span> -->
+
+    <div class="msg">
+        
+        <div class="mat-display-2">You nailed it !!!</div>
+        <h2>Your purchase has been completed successfully</h2>
+        <h3>            
+            To download a receipt, click <a [href]=concat_cart_id download="bb">here</a>
+        </h3>
+        
+        <a mat-raised-button routerLink="main" id="a_btn">Store main page</a>
+    </div>
+
+</div>
